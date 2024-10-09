@@ -17,5 +17,8 @@
         "react-dom": "^18.2.0",
         "sass": "^1.56.1",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "tailwindcss": "^3.4.13"
     }
 }
