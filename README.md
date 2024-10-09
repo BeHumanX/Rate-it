@@ -61,6 +61,11 @@ npm install --save-dev laravel-echo pusher-js && npm run build
 
 - Add this configuration for the laravel reverb and set the field accordingly.
 ```
+
+BROADCAST_CONNECTION=reverb
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+
 REVERB_APP_ID={YOUR_APP_ID}
 REVERB_APP_KEY={YOUR_APP_KEY}
 REVERB_APP_SECRET={YOUR_APP_SECRET}
