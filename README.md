@@ -7,60 +7,101 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Laravel Reverb + React
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Pre-requisites**:
+    - PHP >= 8.2
+    - Composer
+    - MySQL >= 5.7
+    - Node.js >= 20
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Clone the repository, or download the zip file and extract it.
+```shell
+git clone git@github.com:boolfalse/laravel-reverb-react-chat.git && cd laravel-reverb-react-chat/
+```
 
-## Learning Laravel
+- Copy the `.env.example` file to `.env`:
+```shell
+cp .env.example .env
+```
+- Generate application key and `optimize:clear`
+```shell
+php artisan key:generate && php artisan optimize:clear
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Install the dependencies.
+```shell
+composer install
+```
+- Migrate the Database(For folks using sqlite)
+```shell
+php artisan migrate
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Uncommand `DB_CONNECTION=mysql` and the rest of mysql configuration, and then Command `DB_CONNECTION=sqlite` to Create a MySQL database and set the database credentials in the `.env` file(Don't forget to Migrate the database too):
+```shell
+//DB_CONNECTION=sqlite
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE="<database_name>"
+DB_USERNAME="<username>"
+DB_PASSWORD="<password>"
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Install the NPM dependencies.
+```shell
+npm install
+```
+- Install echo separately and build the assets.
+```
+npm install --save-dev laravel-echo pusher-js && npm run build
+```
 
-## Laravel Sponsors
+- Add this configuration for the laravel reverb and set the field accordingly.
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+BROADCAST_CONNECTION=reverb
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
 
-### Premium Partners
+REVERB_APP_ID={YOUR_APP_ID}
+REVERB_APP_KEY={YOUR_APP_KEY}
+REVERB_APP_SECRET={YOUR_APP_SECRET}
+REVERB_HOST="localhost"
+REVERB_PORT=8080
+REVERB_SCHEME=http
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+VITE_REVERB_APP_KEY="${REVERB_APP_KEY}"
+VITE_REVERB_HOST="${REVERB_HOST}"
+VITE_REVERB_PORT="${REVERB_PORT}"
+VITE_REVERB_SCHEME="${REVERB_SCHEME}"
 
-## Contributing
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Optimize the application cache.
+```shell
+php artisan optimize
+```
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **_[Optional]_** For development, run below command to watch the assets for changes.
+```shell
+npm run dev
+```
 
-## Security Vulnerabilities
+- Start WebSocket server.
+```shell
+php artisan reverb:start
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Start the development server using below command or configure a virtual host.
+```shell
+php artisan serve
+```
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **_[Optional]_** Check if connection is okay, use this following command
+```
+php artisan send:update
+```
