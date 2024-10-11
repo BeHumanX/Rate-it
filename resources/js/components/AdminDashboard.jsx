@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Teacher from "./Teacher";
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 const AdminDashboard = () => {
     const [teachers, setTeachers] = useState([]);
     const webSocketChannel = `teacher`;
     const connectWebSocket = () => {
-        window.Echo.channel("teach").listen("GotRating", async (e) => {
+        window.Echo.channel(webSocketChannel).listen("GotRating", async (e) => {
             console.log(e);
             await getTeachers();
         });

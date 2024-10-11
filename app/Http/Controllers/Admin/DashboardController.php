@@ -11,6 +11,7 @@ class DashboardController extends Controller
 {
     public function teachers(): JsonResponse{
         $teachers = Teacher::all();
+
         return response()->json($teachers);
     }
 }
