@@ -9,7 +9,7 @@
 
 ## Laravel + React + Vite
 
-### Library Management Website using laravel framework as backend with Vite React plugin as frontend
+### Teacher Rating System With Laravel Reverb for realtime update and React Vite plugin
 
 
 - **Pre-requisites**:
