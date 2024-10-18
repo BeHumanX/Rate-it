@@ -9,7 +9,7 @@
 
 ## Laravel + React + Vite
 
-# Library Management Website using laravel framework as backend with Vite React plugin as frontend
+### Library Management Website using laravel framework as backend with Vite React plugin as frontend
 
 
 - **Pre-requisites**:
