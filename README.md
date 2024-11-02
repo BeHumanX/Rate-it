@@ -20,7 +20,7 @@
 
 - Clone the repository, or download the zip file and extract it.
 ```shell
-git clone git@github.com:boolfalse/laravel-reverb-react-chat.git && cd laravel-reverb-react-chat/
+git clone git@github.com:/BeHumanX/Rate-it.git && cd Rate-it/
 ```
 
 - Copy the `.env.example` file to `.env`:
